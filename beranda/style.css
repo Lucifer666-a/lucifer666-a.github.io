@@ -5,10 +5,12 @@
 
 body {
   margin: 0;
-  scroll-behavior: smooth;
 }
 
 /*NAVBAR */
+section {
+  scroll-margin-top: 80px; /* tinggi navbar */
+}
 .navbar {
   position: fixed;
   top: 0;
