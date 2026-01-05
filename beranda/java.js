@@ -1,32 +1,38 @@
+function smoothScrollTo(targetY, duration = 800) {
+  const startY = window.pageYOffset;
+  const distance = targetY - startY;
+  let startTime = null;
+
+  function animation(currentTime) {
+    if (!startTime) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const progress = Math.min(timeElapsed / duration, 1);
+
+    window.scrollTo(0, startY + distance * easeInOut(progress));
+
+    if (timeElapsed < duration) {
+      requestAnimationFrame(animation);
+    }
+  }
+
+  function easeInOut(t) {
+    return t < 0.5
+      ? 2 * t * t
+      : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  requestAnimationFrame(animation);
+}
+
 document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', function (e) {
+  link.addEventListener('click', e => {
     e.preventDefault();
 
-    const target = document.querySelector(this.getAttribute('href'));
-    if (!target) return;
+    const target = document.querySelector(link.getAttribute('href'));
+    const offset = 10; // sisa section atas
+    const targetY =
+      target.getBoundingClientRect().top + window.pageYOffset - offset;
 
-    const startY = window.scrollY;
-    const endY = target.getBoundingClientRect().top + startY;
-    const duration = 1200;
-
-    let startTime = null;
-
-    function animateScroll(currentTime) {
-      if (!startTime) startTime = currentTime;
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      const ease = progress < 0.5
-        ? 2 * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-      window.scrollTo(0, startY + (endY - startY) * ease);
-
-      if (elapsed < duration) {
-        requestAnimationFrame(animateScroll);
-      }
-    }
-
-    requestAnimationFrame(animateScroll);
+    smoothScrollTo(targetY, 1200); // <<< SPEED DI SINI
   });
 });
