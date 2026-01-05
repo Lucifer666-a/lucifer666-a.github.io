@@ -15,7 +15,7 @@ section {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 100%;
+  z-index: 1000;
 
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(8px);
@@ -60,6 +60,16 @@ section {
 }
 .nav-links a:hover::after {
   width: 100%;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(40px); 
+  transition: opacity 0.8s ease, transform 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 /* HERO */
 .hero {
