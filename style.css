@@ -12,10 +12,21 @@ body {
 }
 
 .text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-size: 20px;
+  color: black;
 }
 
+.text h1 {
+  display: inline-block;
+  margin-top: 300px;
+  margin-left: 110px;
+  font-size:50px;
+  background-color: rgb(81, 82, 82);
+}
+
+.text h2 {
+  display: flex;
+  margin-top: 5px;
+  margin-left: 110px;
+  font-size:50px;
+  color: rgb(81, 82, 82);
+}
