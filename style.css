@@ -16,19 +16,65 @@ section{
   width: 100%;
 }
 
+.portfolio{
+  display: block;
+  width: fit-content;
+  margin: auto;
+  animation: slideUp 1s ease-out forwards;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  transition: top 0.3s ease, filter 0.3s ease;
+}
+
+.portfolio::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background-color: white;
+
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease;
+}
+
+.portfolio:hover::after{
+  transform: scaleX(1);
+}
+
+.portfolio:hover {
+  filter: drop-shadow(0 0 3px rgba(148, 147, 147, 0.8) );  
+  top: -2px;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .sec1 {
   height: 100vh;
   background-color: rgb(15, 15, 15);
 }
 .page1 {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: rgb(167, 167, 167);
 }
 
 .page1 h1 {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 70px;
   word-break: break-all;
 }
@@ -45,9 +91,24 @@ section{
 
 .page2 h1 {
   padding-top: 400px;
+  font-size: 50px;
 }
 
 .page2 h2 {
   color: rgb(81, 82, 82);
-  
+  font-size: 80px;
+}
+
+.sec3 {
+  background: rgb(0, 0, 0);
+  height: 100vh;
+}
+
+.page3 {
+}
+
+.page3 h1 {
+  color: rgb(255, 255, 255);
+  padding-left: 30px;
+  padding-top: 40px;
 }
