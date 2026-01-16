@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Manufacturing+Consent&display=swap');
 
 * {
   margin: 0;
@@ -20,7 +20,7 @@ body {
   overflow-x: hidden; 
   width: 100%;
   font-family: 'Instrument Sans', sans-serif;
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(0, 0, 0);
 }
 
 /* Section 1 */
@@ -29,39 +29,24 @@ body {
   scroll-snap-stop: always;
   height: 100vh;
   width: 100%;
+  position: relative;
 }
 
-.sec1::before {
+.sec1::before, .circle_line {
   content: "";
   position: absolute;
-  width: 450px;
-  height: 450px;
-  border: 1px solid rgba(255, 255, 255, 0.201);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
   pointer-events: none;
   z-index: 0;
-  
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.circle_line {
-  content: "";
-  position: absolute;
-  width: 1550px;
-  height: 1550px;
-  border: 1px solid rgba(255, 255, 255, 0.201);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: none;
-  z-index: 0;
-  
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
+.sec1::before { width: 450px; height: 450px; }
+.circle_line { width: 1550px; height: 1550px; }
 
 .sec1:has(.portfolio:hover) .circle_line{
   transform: translate(-50%, -50%) scale(0.5);
@@ -415,11 +400,92 @@ body {
   height: 100vh;
 }
 
-.page3 {
+.screen {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  padding: 50px 100px;
+  position: relative;
+  font-family: 'Oswald', sans-serif;
+  color: #9da1a3;
+  text-transform: uppercase;
 }
 
-.page3 h1 {
-  color: rgb(255, 255, 255);
-  padding-left: 30px;
-  padding-top: 40px;
+.header {
+  font-family: 'Manufacturing Consent', sans-serif;
+  font-size: 80px; 
+  color: #fff;
+  text-shadow: 5px 5px 0px #000; 
+  
+  /* UBAH DI SINI */
+  text-transform: capitalize; /* Dari 'uppercase' jadi 'capitalize' */
+  
+  letter-spacing: 2px;
+  margin-bottom: 60px;
+  font-style: italic;
+}
+
+.menu-container, .page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.1s;
+  width: fit-content;
+}
+
+.item .pointer {
+  width: 50px;
+  height: 70px;
+  display: inline-block;
+  margin-right: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-image: none;
+  transition: all 0.1s;
+}
+
+.item:hover .pointer {
+  background-image: url('assets/element/hover.gta.png');
+}
+
+.item:hover {
+  color: #fff;
+}
+
+.footer {
+  position: absolute;
+  bottom: 40px;
+  right: 100px;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.back-btn {
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 20px;
+}
+
+.page-content {
+  display: none;
+  flex-direction: column;
+  min-height: 500px;
+  align-items: flex-start;
+}
+
+.item:hover {
+  color: #fff;
 }

@@ -46,10 +46,37 @@
     </div>
   </section>
 
+  
 
   <section id="sec3" class="sec3">
-    <div class="page3">
-      <h1>My Portfolio</h1>
+    <div class="screen">
+      <div class="header" id="header">Stats</div>
+
+      <div id="main-menu" class="menu-container">
+        <div class="item" onclick="showPage('info')">
+          <span class="pointer"></span> INFO
+        </div>
+        <div class="item" onclick="showPage('cv')">
+          <span class="pointer"></span> CURRICULUM VITAE
+        </div>
+        <div class="item" onclick="showPage('projects')">
+          <span class="pointer"></span> PROJECTS
+        </div>
+        <div class="item" onclick="showPage('contact')">
+          <span class="pointer"></span> CONTACT
+        </div>
+      </div>
+
+      <div id="content-page" class="page-content" style="display: none;">
+        <div id="page-data"></div>
+        <div class="item back-btn" onclick="backToStats()">
+          <span class="pointer"></span> BACK
+        </div>
+      </div>
+
+      <div class="footer">
+        LEFT / RIGHT / MOUSEWHEEL - ADJUST | BACK
+      </div>
     </div>
   </section>
   <script src="java.js"></script>
