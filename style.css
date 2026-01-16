@@ -92,34 +92,52 @@ body {overflow-x: hidden;
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0 5%; 
   position: relative;
-  background-color: aliceblue;
+  background-color: rgb(255, 255, 255);
 }
+
 .text2 {
   position: relative;
-  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto;
   padding: 20px;
-  color: black;
 }
 
 .wrap {
-    background: rgb(149, 143, 143);
-    width: fit-content;
-    padding: 5px 15px;
-    margin-bottom: 10px;
-    color: black;
-    animation: slideFromLeft 1s ease-out forwards;
-  }
+  width: fit-content;
+  padding: 0;
+  margin-bottom: 10px;
+  display: table;
+}
 
 .h1 {
-  font-size: 1.2rem;
+  background: rgb(149, 143, 143);
+  width: fit-content;
+  display: block;
+  opacity: 0;
+  transform: translateX(-50%);
+  animation: slideFromLeft 1s ease-out forwards;
 }
-.type {
-  font-size: 1.rem;
 
-  animation-delay: 0.8s;
+/* PERBAIKAN DI SINI: Satu selector saja */
+.type {
+  padding: 0;
+}
+
+.type_write {
+overflow: hidden; 
+  white-space: nowrap; 
+  border-right: 3px solid transparent; 
+  width: 0; /* Mulai dari kosong biar ngetik */
+  
+  /* Panggil animasi ngetik smo kursor kedap-kedip */
+  animation: 
+    typing 2s steps(20) 1s forwards, 
+    blink 0.75s step-end infinite;
 }
 
 .profile {
@@ -135,6 +153,16 @@ body {overflow-x: hidden;
   filter: grayscale(0%);
 }
 
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; } 
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: rgb(0, 0, 0); }
+}
+
 @keyframes slideFromLeft {
   0% {
     transform: translateX(-50%);
@@ -146,6 +174,7 @@ body {overflow-x: hidden;
   }
 }
 
+/* Media Query tetap sama */
 @media (max-width: 568px) {
   .sec2 {
     flex-direction: column;
@@ -158,15 +187,13 @@ body {overflow-x: hidden;
   .text2 {
     width: 80%;
     text-align: center;
-    animation: slideUp 1s ease-out forwards;
   }
-
   .profile {
     width: 80%;
     max-width: 300px;
-    padding-left: 50px;
   }
 }
+
 /* Section 3 */
 .sec3 {
   background: rgb(0, 0, 0);
