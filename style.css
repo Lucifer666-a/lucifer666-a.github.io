@@ -95,6 +95,12 @@ body {
   background-color: rgb(15, 15, 15);
 }
 
+.port-wrap {
+  animation: slideUp 1s ease-out forwards;
+  transition: all 0.3s ease; 
+  transition:  top 0.3s ease, filter 0.3s ease;
+}
+
 .portfolio {
   z-index: 2;
   display: block;
@@ -104,9 +110,7 @@ body {
   position: relative;
   top: 0;
   
-  animation: slideUp 1s ease-out forwards;
-  transition: all 0.3s ease; 
-  transition:  top 0.3s ease, filter 0.3s ease;
+  transition: transform 0.2s ease-out, top 0.3s ease, filter 0.3s ease;
 }
 
 .portfolio::after {
@@ -132,6 +136,58 @@ body {
   transform: scaleX(1);
 }
 
+.scroll {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+
+  transform: translateX(-50%) translateY(30%);
+
+  opacity: 0;
+  animation: slideUpScroll 1s ease-out forwards 3s;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+  
+}
+.scroll-text {
+  color: rgb(167, 167, 167);
+}
+.mouse {
+  width: 25px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: white;
+  border-radius: 2px;
+  margin-top: 7px;
+  animation: scrollAnim 2s infinite;
+}
+
+.title-wrap {
+  text-align: center;
+}
+
+.sub-title {
+  color: rgba(167, 167, 167, 0.5);
+  font-size: 12px;
+  letter-spacing: 5px;
+  margin-top: 10px;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards 1.5s;
+}
+
+
 @keyframes slideUp {
   0% {
     transform: translateY(30%);
@@ -141,6 +197,26 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+@keyframes slideUpScroll {
+  0% {
+    transform: translateX(-50%) translateY(30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scrollAnim {
+  0% { opacity: 1; transform: translateY(-3px);}
+  100% { opacity: 0; transform: translateY(5px);}
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 
 @media (max-width: 600px) {
