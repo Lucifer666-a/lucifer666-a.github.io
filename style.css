@@ -9,8 +9,15 @@
   list-style: none;
 }
 
+html{
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
 
-body {overflow-x: hidden; 
+body {
+  overflow-y: scroll;
+  height: 100vh;
+  overflow-x: hidden; 
   width: 100%;
   font-family: 'Instrument Sans', sans-serif;
   background-color: rgb(255, 0, 0);
@@ -18,10 +25,42 @@ body {overflow-x: hidden;
 
 /* Section 1 */
 .sec1{
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   height: 100vh;
   width: 100%;
 }
 
+.sec1::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border: 1px solid rgba(255, 255, 255, 0.201);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: none;
+  z-index: 0;
+  
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+
+.sec1:has(.portfolio:hover)::before {
+  transform: translate(-50%, -50%) scale(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+              inset: 0 0 20px rgba(255, 255, 255, 0.4);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.sec1:has(.portfolio:hover) .page1 {
+  background-color: rgb(0, 0, 0);
+  transition: background-color 0.6s ease;
+} 
 .page1 {
   height: 100vh;
   display: flex;
@@ -33,6 +72,7 @@ body {overflow-x: hidden;
 }
 
 .portfolio {
+  z-index: 2;
   display: block;
   width: fit-content;
   font-size: 70px;
@@ -89,13 +129,40 @@ body {overflow-x: hidden;
 
 /* Section 2 */
 .sec2 {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0 5%; 
   position: relative;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(227, 227, 227);
+  background-image: radial-gradient(#cfcbcb 0.7px, transparent 1.0px);
+  background-size: 30px 30px;
+}
+
+.sec2::before {
+  content: "";
+  position: absolute;
+
+  bottom: 10px;
+  left: 10px;
+
+  width: 700px;
+  height: 480px;
+
+  border-left: 2px solid rgb(0, 0, 0);
+  border-bottom: 2px solid rgb(0, 0, 0);
+
+  clip-path: inset(100% 100% 0% 0%);
+
+  opacity: 1;
+  transition: all 1.5s ease-out 1.5s;
+}
+
+.sec2.active::before {
+  clip-path: inset(0% 0% 0% 0%);
 }
 
 .text2 {
@@ -103,8 +170,27 @@ body {overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: -300px;
   width: auto;
   padding: 20px;
+}
+
+.text2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: black;
+
+  transform: scaleY(0);
+
+  transform-origin: top;
+}
+
+.sec2.active .text2::before {
+  animation: garisMuncul 1s ease-out 1s forwards;
 }
 
 .wrap {
@@ -118,8 +204,12 @@ body {overflow-x: hidden;
   background: rgb(149, 143, 143);
   width: fit-content;
   display: block;
+  font-size: 16px;
   opacity: 0;
   transform: translateX(-50%);
+}
+
+.sec2.active .h1 {
   animation: slideFromLeft 1s ease-out forwards;
 }
 
@@ -129,15 +219,18 @@ body {overflow-x: hidden;
 }
 
 .type_write {
-overflow: hidden; 
+  font-size: 20px;
+  font-weight: bold;
+  overflow: hidden; 
   white-space: nowrap; 
   border-right: 3px solid transparent; 
   width: 0; /* Mulai dari kosong biar ngetik */
-  
-  /* Panggil animasi ngetik smo kursor kedap-kedip */
+}
+
+.sec2.active .type_write {
   animation: 
-    typing 2s steps(20) 1s forwards, 
-    blink 0.75s step-end infinite;
+  typing 2s steps(30) 1s forwards, 
+  blink 0.75s step-end infinite;
 }
 
 .profile {
@@ -147,10 +240,17 @@ overflow: hidden;
   transition: filter 0.5s ease;
   cursor: pointer;
   display: block;
+
+  outline: 2px solid black;
+  outline-offset: 15px;
+
+  transition: all 0.5s ease;
 }
 
 .profile:hover {
   filter: grayscale(0%);
+  transform: scale(1.05);
+  outline-offset: 0px;
 }
 
 @keyframes typing {
@@ -170,6 +270,17 @@ overflow: hidden;
   }
   100% {
     transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes garisMuncul {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
     opacity: 1;
   }
 }
@@ -194,8 +305,12 @@ overflow: hidden;
   }
 }
 
+
+
 /* Section 3 */
 .sec3 {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   background: rgb(0, 0, 0);
   height: 100vh;
 }

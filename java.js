@@ -18,8 +18,22 @@ function typeNewText() {
 
         // 3. Pasang lagi animasinyo
         // Pake 'forwards' biar kursor dak ilang pas lah selesai ngetik
-        textElement.style.animation = 'typing 2s steps(20) forwards, blink 0.75s step-end infinite';
+        textElement.style.animation = 'typing 2s steps(30) forwards, blink 0.75s step-end infinite';
     }, 500); 
 }
 
-setInterval(typeNewText, 6000);
+
+//on scroll
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+
+            if (!window.typeInterval) {
+                window.typeInterval = setInterval(typeNewText, 9000);
+            }
+        }
+    });
+},  {threshold: 0.3 }); 
+
+observer.observe(document.querySelector('.sec2'));
