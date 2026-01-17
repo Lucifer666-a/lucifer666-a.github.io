@@ -4,9 +4,14 @@ let profIndex = 0;
 const textElement = document.querySelector('.type_write');
 
 // Inisialisasi Audio
-const hoverSfx = new Audio('assets/sounds/hover.mp3');
-const selectSfx = new Audio('assets/sounds/select.mp3');
-const backSfx = new Audio('assets/sounds/back.mp3');
+const hoverSfx = new Audio('assets/sounds/sec3_gta/hover.mp3');
+const selectSfx = new Audio('assets/sounds/sec3_gta/select.mp3');
+const backSfx = new Audio('assets/sounds/sec3_gta/back.mp3');
+const flipSfx = new Audio('assets/sounds/sec2_origin/flip.mp3')
+const unlockSfx = new Audio('assets/sounds/unlock.mp3')
+const deniedSfx = new Audio('assets/sounds/denied.mp3')
+
+
 
 // Fungsi universal untuk putar suara agar tidak tumpang tindih
 const playSfx = (audio) => {
@@ -15,15 +20,6 @@ const playSfx = (audio) => {
     audio.volume = 1.0;
     audio.play().catch(() => {}); // Biar gak error kalau diblokir browser
 };
-
-// --- 2. TYPEWRITER LOGIC (SECTION 2) ---
-function typeNewText() {
-    textElement.style.animation = 'none';
-    void textElement.offsetWidth; // Trigger reflow
-    profIndex = (profIndex + 1) % professions.length;
-    textElement.textContent = professions[profIndex];
-    textElement.style.animation = 'typing 2s steps(30) forwards, blink 0.75s step-end infinite';
-}
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -38,7 +34,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 observer.observe(document.querySelector('.sec2'));
 
-// --- 3. PARALLAX EFFECT (SECTION 1) ---
+// --- 2. PARALLAX EFFECT (SECTION 1) ---
 const portfolioText = document.querySelector('.portfolio');
 document.addEventListener('mousemove', (e) => {
     if (portfolioText && window.scrollY < window.innerHeight) {
@@ -47,6 +43,15 @@ document.addEventListener('mousemove', (e) => {
         portfolioText.style.transform = `translate(${x}px, ${y}px)`;
     }
 });
+
+// --- 3. TYPEWRITER LOGIC (SECTION 2) ---
+function typeNewText() {
+    textElement.style.animation = 'none';
+    void textElement.offsetWidth; // Trigger reflow
+    profIndex = (profIndex + 1) % professions.length;
+    textElement.textContent = professions[profIndex];
+    textElement.style.animation = 'typing 2s steps(30) forwards, blink 0.75s step-end infinite';
+}
 
 // --- 4. GTA MENU LOGIC (SECTION 3) ---
 function showPage(pageName) {
@@ -85,9 +90,11 @@ document.addEventListener('mouseover', (e) => {
     if (e.target.closest('.item')) playSfx(hoverSfx);
 });
 
+
+
 // Unlock Audio (Auto-play fix)
 const unlock = () => {
-    playSfx(hoverSfx); // "Pancing" audio context
+    playSfx(unlockSfx); // "Pancing" audio context
     document.removeEventListener('click', unlock);
     document.removeEventListener('keydown', unlock);
 };
@@ -101,13 +108,36 @@ document.addEventListener('keydown', unlock);
 function toggleTheme() {
     const sec2 = document.querySelector('.sec2');
     const profileCard = document.getElementById('profileCard');
+
     if(profileCard) {
     profileCard.classList.toggle('flipped');
 
     sec2.classList.toggle('war-mode');
 
         if(typeof playSfx === "function") {
-            playSfx(selectSfx);
+            playSfx(flipSfx);
         }
     }
 }
+
+// acces portfolio
+
+const portfolioBtn = document.querySelector('.portfolio');
+
+portfolioBtn.addEventListener('click', () => {
+    const sec2 = document.querySelector('.sec2');
+
+    if (!sec2.classList.contains('war-mode')) {
+
+        playSfx(deniedSfx);
+
+        portfolioBtn.classList.add('denied');
+
+        setTimeout(() => {
+            portfolioBtn.classList.remove('denied');
+            portfolioBtn.style.color = "";
+        }, 300);
+    } else {
+        console.log("Access Granted!");
+    }
+});
