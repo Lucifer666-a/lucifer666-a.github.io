@@ -93,3 +93,21 @@ const unlock = () => {
 };
 document.addEventListener('click', unlock);
 document.addEventListener('keydown', unlock);
+
+
+
+
+// war mode
+function toggleTheme() {
+    const sec2 = document.querySelector('.sec2');
+    const profileCard = document.getElementById('profileCard');
+    if(profileCard) {
+    profileCard.classList.toggle('flipped');
+
+    sec2.classList.toggle('war-mode');
+
+        if(typeof playSfx === "function") {
+            playSfx(selectSfx);
+        }
+    }
+}

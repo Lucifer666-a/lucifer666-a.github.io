@@ -98,6 +98,15 @@ body {
   transition: transform 0.2s ease-out, top 0.3s ease, filter 0.3s ease;
 }
 
+.sub-title {
+  color: rgba(167, 167, 167, 0.5);
+  font-size: 12px;
+  letter-spacing: 5px;
+  margin-top: 10px;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards 1.5s;
+}
+
 .portfolio::after {
   content: '';
   position: absolute;
@@ -121,6 +130,7 @@ body {
   transform: scaleX(1);
 }
 
+/* mouse scroll */
 .scroll {
   position: absolute;
   bottom: 30px;
@@ -163,16 +173,9 @@ body {
   text-align: center;
 }
 
-.sub-title {
-  color: rgba(167, 167, 167, 0.5);
-  font-size: 12px;
-  letter-spacing: 5px;
-  margin-top: 10px;
-  opacity: 0;
-  animation: fadeIn 2s ease forwards 1.5s;
-}
 
 
+/* kumpulan keyframes */
 @keyframes slideUp {
   0% {
     transform: translateY(30%);
@@ -212,6 +215,10 @@ body {
   }
 }
 
+
+
+
+
 /* Section 2 */
 .sec2 {
   scroll-snap-align: start;
@@ -225,6 +232,8 @@ body {
   background-color: rgb(227, 227, 227);
   background-image: radial-gradient(#cfcbcb 0.7px, transparent 1.0px);
   background-size: 30px 30px;
+  transition: background-color 0.8s ease, color 0.8s ease;
+  z-index: 1;
 }
 
 .sec2::before {
@@ -243,13 +252,135 @@ body {
   clip-path: inset(100% 100% 0% 0%);
 
   opacity: 1;
-  transition: all 1.5s ease-out 1.5s;
+  transition: border-color 0.2s ease, clip-path 1.5s ease-out 1.5s;
 }
 
 .sec2.active::before {
   clip-path: inset(0% 0% 0% 0%);
 }
 
+/* profile hover */
+
+
+.sec2:has(.profile-container:hover) {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.sec2:has(.profile-container:hover) .h1 h1,
+.sec2:has(.profile-container:hover) .type_write {
+  background-color: rgb(154, 158, 158);
+  color: white;
+  transition: all 0.5s ease;
+}
+
+.sec2:has(.profile-container:hover) .text2::before{
+  background-color: white !important;
+  transition: backgound-color 0.5s ease;
+}
+
+.sec2:has(.profile-container:hover)::before {
+  border-color: rgb(255, 255, 255) !important;
+  transition: border-color 0.1s ease;
+}
+
+.sec2.war-mode:has(.profile-container:hover){
+  background-color: #0c0202 !important;
+}
+
+/* flip container */
+.profile-container {
+  width: 300px;
+  height: 450px;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+}
+
+.profile-card{
+  width: 100%;
+  height: 400px;
+  position: relative;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.profile-container:hover .profile-card {
+  animation: glitch-fixed 0.3s infinite;
+}
+
+.profile-container:hover .profile {
+  filter: grayscale(0);
+  outline-offset: 0px;
+  
+  outline: 2px solid #3e0707 !important;
+
+  box-shadow: 0 0 20px 5px rgba(79, 0, 0, 0.6);
+
+  transition: all 0.3s ease;
+}
+
+.profile-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: 2px solid black;
+  outline-offset: 15px;
+  transition: filter 0.5s ease, outline-color 0.5s;
+}
+
+.profile.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.profile.back {
+  transform: rotateY(180deg);
+}
+
+
+/* war-mode */
+
+.sec2.war-mode {
+  background-color: #210404 !important;
+  background-image: radial-gradient(#530b0b 0.7px, transparent 1.0px);
+}
+
+.sec2.war-mode .h1 h1{
+  background-color: #e06e6e;
+}
+
+.sec2.war-mode .h1 h1,
+.sec2.war-mode .type_write,
+.sec2.war-mode .text2 {
+  color: #000000 !important;
+}
+
+.sec2.war-mode .text2::before{
+  background-color: #000000 !important;
+}
+.sec2.war-mode::before {
+  border-color: #000000 !important;
+  background-color: #ffffff00 !important;
+}
+
+.sec2.war-mode .profile {
+  outline-color: #ffffff;
+
+  box-shadow: 0 0 30px 10px rgba(228, 1, 1, 0.6);
+}
+
+/* wrap text */
 .text2 {
   position: relative;
   display: flex;
@@ -258,6 +389,8 @@ body {
   margin-top: -300px;
   width: auto;
   padding: 20px;
+  max-width: 500px;
+  z-index: 2;
 }
 
 .text2::before {
@@ -298,7 +431,7 @@ body {
   animation: slideFromLeft 1s ease-out forwards;
 }
 
-/* PERBAIKAN DI SINI: Satu selector saja */
+/* type animation */
 .type {
   padding: 0;
 }
@@ -336,8 +469,13 @@ body {
   filter: grayscale(0%);
   transform: scale(1.05);
   outline-offset: 0px;
+  background-color: rgb(90, 86, 86);
+  background-image: radial-gradient(#685959 0.7px, transparent 1.0px);
+
+  animation: glitch 0.3s infinite;
 }
 
+/* kumpulan keyframes */
 @keyframes typing {
   from { width: 0; }
   to { width: 100%; } 
@@ -368,6 +506,24 @@ body {
     transform: scaleY(1);
     opacity: 1;
   }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0) scale(1.02); }
+  20% { transform: translate(-0.5px, 0.25px) scale(1.02); }
+  40% { transform: translate(-0.5px, -0.25px) scale(1.02); }
+  60% { transform: translate(0.5px, 0.25px) scale(1.02); }
+  80% { transform: translate(0.5px, -0.25px) scale(1.02); }
+  100% { transform: translate(0) scale(1.02); }
+}
+
+@keyframes glitch-fixed {
+  0% {margin: 0;}
+  25% {margin: -2px 2px;}
+  50% {margin: 2px -2px;}
+  75% {margin: -1px -1px;}
+  100% {margin: 0;}
+  
 }
 
 /* Media Query tetap sama */
