@@ -120,24 +120,41 @@ function toggleTheme() {
     }
 }
 
-// acces portfolio
-
+// access portfolio
 const portfolioBtn = document.querySelector('.portfolio');
 
 portfolioBtn.addEventListener('click', () => {
+    const sec1 = document.querySelector('.sec1');
     const sec2 = document.querySelector('.sec2');
 
+    // 1. Cek apakah kartu di Sec 2 sudah 'war-mode'
     if (!sec2.classList.contains('war-mode')) {
-
         playSfx(deniedSfx);
-
         portfolioBtn.classList.add('denied');
 
         setTimeout(() => {
             portfolioBtn.classList.remove('denied');
             portfolioBtn.style.color = "";
         }, 300);
+        
     } else {
-        console.log("Access Granted!");
+        // 2. Jika SUDAH war-mode, cek apakah ini klik PERTAMA (outbreak belum aktif)
+        if (!sec1.classList.contains('outbreak-active')) {
+            
+            // Tambahkan class utama (ini yang bikin logo Umbrella & Vignette muncul)
+            sec1.classList.add('outbreak-active');
+
+            console.log("System Compromised. Umbrella Virus Detected.");
+
+            // 3. Efek Getar Layar: Cuma jalan di klik pertama ini
+            sec1.classList.add('screen-shake');
+            setTimeout(() => {
+                sec1.classList.remove('screen-shake');
+            }, 500);
+            
+        } else {
+            // Klik kedua dan seterusnya setelah logo muncul
+            console.log("Access already granted. Virus active.");
+        }
     }
 });

@@ -23,165 +23,212 @@ body {
   background-color: rgb(0, 0, 0);
 }
 
-/* Section 1 */
-.sec1{
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  height: 100vh;
-  width: 100%;
-  position: relative;
+/* ==========================================================================
+   SECTION 1 - BASE SETUP
+   ========================================================================== */
+.sec1 {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
-.sec1::before, .circle_line {
-  content: "";
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: none;
-  z-index: 0;
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+.page1 {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(167, 167, 167);
+    padding: 20px;
+    background-color: rgb(15, 15, 15);
+    transition: background-color 3s ease-in-out;
+}
+
+/* Background Elements (Circles) */
+.sec1::before, 
+.circle_line {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: none;
+    z-index: 0;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .sec1::before { width: 450px; height: 450px; }
 .circle_line { width: 1550px; height: 1550px; }
 
-.sec1:has(.portfolio:hover) .circle_line{
-  transform: translate(-50%, -50%) scale(0.5);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.678);
-              inset: 0 0 20px rgba(255, 255, 255, 0.4);
-  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.646)); 
-}
-
-.sec1:has(.portfolio:hover)::before {
-  transform: translate(-50%, -50%) scale(1.1);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-              inset: 0 0 20px rgba(255, 255, 255, 0.4);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
-}
-
-.sec1:has(.portfolio:hover) .page1 {
-  background-color: rgb(0, 0, 0);
-  transition: background-color 0.6s ease;
-} 
-.page1 {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(167, 167, 167);
-  padding: 20px;
-  background-color: rgb(15, 15, 15);
-}
+/* Portfolio Button & Text */
+.title-wrap { text-align: center; }
 
 .port-wrap {
-  animation: slideUp 1s ease-out forwards;
-  transition: all 0.3s ease; 
-  transition:  top 0.3s ease, filter 0.3s ease;
+    animation: slideUp 1s ease-out forwards;
+    transition: top 0.3s ease, filter 0.3s ease;
 }
 
 .portfolio {
-  z-index: 2;
-  display: block;
-  width: fit-content;
-  font-size: 70px;
-  cursor: pointer;
-  position: relative;
-  top: 0;
-  color: rgb(167, 167, 167);
-  transition: color 0.3s ease, transform 0.3s ease, top 0.3s ease, filter 0.3s ease;
-}
-
-.portfolio.denied {
-  color: #8b0000 !important;
-  text-shadow: 0 0 20px rgb(160, 0, 0);
-  animation: shake 0.3s ease-in-out;
+    z-index: 2;
+    display: block;
+    width: fit-content;
+    font-size: 70px;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    color: rgb(167, 167, 167);
+    transition: color 0.3s ease, transform 0.3s ease, top 0.3s ease, filter 0.3s ease;
 }
 
 .sub-title {
-  color: rgba(167, 167, 167, 0.5);
-  font-size: 12px;
-  letter-spacing: 5px;
-  margin-top: 10px;
-  opacity: 0;
-  animation: fadeIn 2s ease forwards 1.5s;
+    color: rgba(167, 167, 167, 0.5);
+    font-size: 12px;
+    letter-spacing: 5px;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards 1.5s;
+}
+
+/* Red Vignette Overlay (Base) */
+.sec1::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 70%, rgba(103, 14, 4, 0.3) 100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease-in-out; 
+    z-index: 10;
+}
+
+/* Hidden Umbrella Logo */
+.umbrella {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.5); 
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none; 
+    will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   INTERACTION - HOVER & DENIED
+   ========================================================================== */
+.sec1:has(.portfolio:hover) .circle_line {
+    transform: translate(-50%, -50%) scale(0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.678), inset 0 0 20px rgba(255, 255, 255, 0.4);
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.646)); 
+}
+
+.sec1:has(.portfolio:hover)::before {
+    transform: translate(-50%, -50%) scale(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.4);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.sec1:has(.portfolio:hover) .page1 {
+    background-color: rgb(0, 0, 0);
+} 
+
+.portfolio:hover {
+    filter: drop-shadow(0 0 5px rgba(148, 147, 147, 0.8));  
+    top: -7px;
+    color: white;
 }
 
 .portfolio::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: white;
-  transform: scaleX(0);
-  transform-origin: bottom left;
-  transition: transform 0.3s ease;
+    content: '';
+    position: absolute;
+    width: 100%; height: 2px;
+    bottom: -5px; left: 0;
+    background-color: white;
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.3s ease;
 }
 
-.portfolio:hover {
-  filter: drop-shadow(0 0 5px rgba(148, 147, 147, 0.8));  
-  top: -7px;
-  color: white;
+.portfolio:hover::after { transform: scaleX(1); }
+
+.portfolio.denied {
+    color: #8b0000 !important;
+    text-shadow: 0 0 20px rgb(160, 0, 0);
+    animation: shake 0.3s ease-in-out;
 }
 
-.portfolio:hover::after {
-  transform: scaleX(1);
+/* ==========================================================================
+   TRIGGERED STATE - OUTBREAK ACTIVE
+   ========================================================================== */
+
+/* Background & Screen Effects */
+.sec1.outbreak-active .page1 { background-color: #0c0202; }
+
+.sec1.outbreak-active::after {
+    opacity: 1;
+    animation: smoothVignettePulse 4s infinite alternate ease-in-out;
 }
 
-/* mouse scroll */
+.screen-shake { animation: shakeScreen 0.5s infinite; }
+
+/* Glowing Red Circles */
+.sec1.outbreak-active::before, 
+.sec1.outbreak-active .circle_line {
+    border: 1.5px solid rgba(139, 0, 0, 0.8);
+    box-shadow: 0 0 15px rgba(139, 0, 0, 0.6), inset 0 0 15px rgba(139, 0, 0, 0.4);
+    filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.2));
+    transition: all 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sec1.outbreak-active .circle_line {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Umbrella Logo Animation */
+.sec1.outbreak-active .umbrella {
+    opacity: 0.15;
+    animation: spinOutbreak 5s ease-out forwards;
+}
+
+/* ==========================================================================
+   SCROLL MOUSE HINT (Bottom Section)
+   ========================================================================== */
 .scroll {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-
-  transform: translateX(-50%) translateY(30%);
-
-  opacity: 0;
-  animation: slideUpScroll 1s ease-out forwards 3s;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  z-index: 5;
-  
+    position: absolute;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(30%);
+    opacity: 0;
+    animation: slideUpScroll 1s ease-out forwards 3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 5;
 }
-.scroll-text {
-  color: rgb(167, 167, 167);
-}
+
+.scroll-text { color: rgb(167, 167, 167); }
 .mouse {
-  width: 25px;
-  height: 40px;
-  border: 2px solid white;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
+    width: 25px; height: 40px;
+    border: 2px solid white;
+    border-radius: 20px;
+    display: flex; justify-content: center;
 }
 
 .wheel {
-  width: 4px;
-  height: 8px;
-  background: white;
-  border-radius: 2px;
-  margin-top: 7px;
-  animation: scrollAnim 2s infinite;
+    width: 4px; height: 8px;
+    background: white;
+    border-radius: 2px;
+    margin-top: 7px;
+    animation: scrollAnim 2s infinite;
 }
 
-.title-wrap {
-  text-align: center;
-}
-
-
-
-/* kumpulan keyframes */
+/* ... Keyframes tetap sama di bawah ... */
 @keyframes slideUp {
   0% {
     transform: translateY(30%);
@@ -220,6 +267,48 @@ body {
   75% { transform: translateX(-40px);}
 }
 
+@keyframes spinOutbreak {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+  }
+  20% {
+    opacity: 0.2; /* Muncul perlahan di awal */
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1.15) rotate(1130deg);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(1.2) rotate(1100deg);
+  }
+}
+
+@keyframes shakeScreen {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes smoothVignettePulse {
+    0% {
+        opacity: 0.3; /* Merah sangat tipis */
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 0.8; /* Merah menebal tipis */
+        filter: blur(0px);
+    }
+}
+
 @media (max-width: 600px) {
   .portfolio {
     font-size: 40px;
@@ -232,260 +321,203 @@ body {
 
 
 
-/* Section 2 */
+
+/* ==========================================================================
+   SECTION 2 - BASE SETUP (NORMAL MODE)
+   ========================================================================== */
 .sec2 {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5%; 
-  position: relative;
-  background-color: rgb(227, 227, 227);
-  background-image: radial-gradient(#cfcbcb 0.7px, transparent 1.0px);
-  background-size: 30px 30px;
-  transition: background-color 0.8s ease, color 0.8s ease;
-  z-index: 1;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%; 
+    position: relative;
+    background-color: rgb(227, 227, 227);
+    background-image: radial-gradient(#cfcbcb 0.7px, transparent 1.0px);
+    background-size: 30px 30px;
+    transition: background-color 0.8s ease, color 0.8s ease;
+    z-index: 1;
 }
 
+/* Garis Border Samping L-Shape */
 .sec2::before {
-  content: "";
-  position: absolute;
-
-  bottom: 10px;
-  left: 10px;
-
-  width: 700px;
-  height: 480px;
-
-  border-left: 2px solid rgb(0, 0, 0);
-  border-bottom: 2px solid rgb(0, 0, 0);
-
-  clip-path: inset(100% 100% 0% 0%);
-
-  opacity: 1;
-  transition: border-color 0.2s ease, clip-path 1.5s ease-out 1.5s;
+    content: "";
+    position: absolute;
+    bottom: 10px; left: 10px;
+    width: 700px; height: 480px;
+    border-left: 2px solid rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0, 0, 0);
+    clip-path: inset(100% 100% 0% 0%);
+    opacity: 1;
+    transition: border-color 0.2s ease, clip-path 1.5s ease-out 1.5s;
 }
 
 .sec2.active::before {
-  clip-path: inset(0% 0% 0% 0%);
+    clip-path: inset(0% 0% 0% 0%);
 }
 
-/* profile hover */
-
-
-.sec2:has(.profile-container:hover) {
-  background-color: rgba(0, 0, 0, 0.8) !important;
+/* ==========================================================================
+   TEXT ELEMENTS (TYPING & TITLES)
+   ========================================================================== */
+.text2 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -300px;
+    width: auto;
+    padding: 20px;
+    max-width: 500px;
+    z-index: 2;
 }
 
-.sec2:has(.profile-container:hover) .h1 h1,
-.sec2:has(.profile-container:hover) .type_write {
-  background-color: rgb(154, 158, 158);
-  color: white;
-  transition: all 0.5s ease;
+/* Garis Vertical di samping teks */
+.text2::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px; height: 100%;
+    background-color: black;
+    transform: scaleY(0);
+    transform-origin: top;
 }
 
-.sec2:has(.profile-container:hover) .text2::before{
-  background-color: white !important;
-  transition: backgound-color 0.5s ease;
+.sec2.active .text2::before {
+    animation: garisMuncul 1s ease-out 1s forwards;
 }
 
-.sec2:has(.profile-container:hover)::before {
-  border-color: rgb(255, 255, 255) !important;
-  transition: border-color 0.1s ease;
+.h1 {
+    background: rgb(149, 143, 143);
+    width: fit-content;
+    display: block;
+    font-size: 16px;
+    opacity: 0;
+    transform: translateX(-50%);
 }
 
-.sec2.war-mode:has(.profile-container:hover){
-  background-color: #0c0202 !important;
+.sec2.active .h1 {
+    animation: slideFromLeft 1s ease-out forwards;
 }
 
-/* flip container */
+.type_write {
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden; 
+    white-space: nowrap; 
+    border-right: 3px solid transparent; 
+    width: 0;
+}
+
+.sec2.active .type_write {
+    animation: typing 2s steps(30) 1s forwards, blink 0.75s step-end infinite;
+}
+
+/* ==========================================================================
+   PROFILE CARD (FLIP & GLITCH)
+   ========================================================================== */
 .profile-container {
-  width: 300px;
-  height: 450px;
-  perspective: 1000px;
-  cursor: pointer;
-  position: relative;
-  padding: 10px;
+    width: 300px;
+    height: 450px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
 }
 
-.profile-card{
-  width: 100%;
-  height: 400px;
-  position: relative;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-  pointer-events: none;
+.profile-card {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    pointer-events: none;
 }
 
-.profile-container:hover .profile-card {
-  animation: glitch-fixed 0.3s infinite;
-}
-
-.profile-container:hover .profile {
-  filter: grayscale(0);
-  outline-offset: 0px;
-  
-  outline: 2px solid #3e0707 !important;
-
-  box-shadow: 0 0 20px 5px rgba(79, 0, 0, 0.6);
-
-  transition: all 0.3s ease;
-}
-
-.profile-card.flipped {
-  transform: rotateY(180deg);
-}
+.profile-card.flipped { transform: rotateY(180deg); }
 
 .profile {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  outline: 2px solid black;
-  outline-offset: 15px;
-  transition: filter 0.5s ease, outline-color 0.5s;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    top: 0; left: 0;
+    outline: 2px solid black;
+    outline-offset: 15px;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
 }
 
-.profile.front {
-  z-index: 2;
-  transform: rotateY(0deg);
+.profile.front { z-index: 2; transform: rotateY(0deg); }
+.profile.back { transform: rotateY(180deg); }
+
+/* Profile Hover State */
+.profile-container:hover .profile-card { animation: glitch-fixed 0.3s infinite; }
+
+.profile-container:hover .profile {
+    filter: grayscale(0);
+    outline-offset: 0px;
+    outline: 2px solid #3e0707 !important;
+    box-shadow: 0 0 20px 5px rgba(79, 0, 0, 0.6);
 }
 
-.profile.back {
-  transform: rotateY(180deg);
-}
-
-
-/* war-mode */
-
+/* ==========================================================================
+   WAR-MODE TRIGGERED (RESIDENT EVIL STYLE)
+   ========================================================================== */
 .sec2.war-mode {
-  background-color: #210404 !important;
-  background-image: radial-gradient(#530b0b 0.7px, transparent 1.0px);
+    background-color: #210404 !important;
+    background-image: radial-gradient(#530b0b 0.7px, transparent 1.0px);
 }
 
-.sec2.war-mode .h1 h1{
-  background-color: #e06e6e;
-}
+.sec2.war-mode .h1 h1 { background-color: #e06e6e; }
 
 .sec2.war-mode .h1 h1,
 .sec2.war-mode .type_write,
 .sec2.war-mode .text2 {
-  color: #000000 !important;
+    color: #000000 !important;
 }
 
-.sec2.war-mode .text2::before{
-  background-color: #000000 !important;
-}
+.sec2.war-mode .text2::before { background-color: #000000 !important; }
+
 .sec2.war-mode::before {
-  border-color: #000000 !important;
-  background-color: #ffffff00 !important;
+    border-color: #000000 !important;
+    background-color: #ffffff00 !important;
 }
 
 .sec2.war-mode .profile {
-  outline-color: #ffffff;
-
-  box-shadow: 0 0 30px 10px rgba(228, 1, 1, 0.6);
+    outline-color: #ffffff;
+    box-shadow: 0 0 30px 10px rgba(228, 1, 1, 0.6);
 }
 
-/* wrap text */
-.text2 {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: -300px;
-  width: auto;
-  padding: 20px;
-  max-width: 500px;
-  z-index: 2;
+/* ==========================================================================
+   GLOBAL SECTION HOVER INTERACTION
+   ========================================================================== */
+.sec2:has(.profile-container:hover) {
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-.text2::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 2px;
-  height: 100%;
-  background-color: black;
-
-  transform: scaleY(0);
-
-  transform-origin: top;
+.sec2:has(.profile-container:hover) .h1 h1,
+.sec2:has(.profile-container:hover) .type_write {
+    background-color: rgb(154, 158, 158);
+    color: white;
+    transition: all 0.5s ease;
 }
 
-.sec2.active .text2::before {
-  animation: garisMuncul 1s ease-out 1s forwards;
+.sec2:has(.profile-container:hover) .text2::before {
+    background-color: white !important;
 }
 
-.wrap {
-  width: fit-content;
-  padding: 0;
-  margin-bottom: 10px;
-  display: table;
+.sec2:has(.profile-container:hover)::before {
+    border-color: rgb(255, 255, 255) !important;
 }
 
-.h1 {
-  background: rgb(149, 143, 143);
-  width: fit-content;
-  display: block;
-  font-size: 16px;
-  opacity: 0;
-  transform: translateX(-50%);
-}
-
-.sec2.active .h1 {
-  animation: slideFromLeft 1s ease-out forwards;
-}
-
-/* type animation */
-.type {
-  padding: 0;
-}
-
-.type_write {
-  font-size: 20px;
-  font-weight: bold;
-  overflow: hidden; 
-  white-space: nowrap; 
-  border-right: 3px solid transparent; 
-  width: 0; /* Mulai dari kosong biar ngetik */
-}
-
-.sec2.active .type_write {
-  animation: 
-  typing 2s steps(30) 1s forwards, 
-  blink 0.75s step-end infinite;
-}
-
-.profile {
-  width: 300px;
-  height: auto;
-  filter: grayscale(100%);
-  transition: filter 0.5s ease;
-  cursor: pointer;
-  display: block;
-
-  outline: 2px solid black;
-  outline-offset: 15px;
-
-  transition: all 0.5s ease;
-}
-
-.profile:hover {
-  filter: grayscale(0%);
-  transform: scale(1.05);
-  outline-offset: 0px;
-  background-color: rgb(90, 86, 86);
-  background-image: radial-gradient(#685959 0.7px, transparent 1.0px);
-
-  animation: glitch 0.3s infinite;
+/* Special Case: Hover pas udah War Mode */
+.sec2.war-mode:has(.profile-container:hover) {
+    background-color: #0c0202 !important;
 }
 
 /* kumpulan keyframes */
@@ -561,100 +593,100 @@ body {
 
 
 
-/* Section 3 */
+/* ==========================================================================
+   SECTION 3 - GTA SA MENU STYLE
+   ========================================================================== */
 .sec3 {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  background: rgb(0, 0, 0);
-  height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    background: rgb(0, 0, 0);
+    height: 100vh;
 }
 
 .screen {
-  width: 100%;
-  height: 100vh;
-  background-color: #000;
-  padding: 50px 100px;
-  position: relative;
-  font-family: 'Oswald', sans-serif;
-  color: #9da1a3;
-  text-transform: uppercase;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    padding: 50px 100px;
+    position: relative;
+    font-family: 'Oswald', sans-serif;
+    color: #9da1a3;
+    text-transform: uppercase;
 }
 
+/* --- Header GTA (Judul Menu) --- */
 .header {
-  font-family: 'Manufacturing Consent', sans-serif;
-  font-size: 80px; 
-  color: #fff;
-  text-shadow: 5px 5px 0px #000; 
-  
-  /* UBAH DI SINI */
-  text-transform: capitalize; /* Dari 'uppercase' jadi 'capitalize' */
-  
-  letter-spacing: 2px;
-  margin-bottom: 60px;
-  font-style: italic;
+    font-family: 'Manufacturing Consent', sans-serif;
+    font-size: 80px; 
+    color: #fff;
+    text-shadow: 5px 5px 0px #000; 
+    text-transform: capitalize; 
+    letter-spacing: 2px;
+    margin-bottom: 60px;
+    font-style: italic;
 }
 
-.menu-container, .page-content {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+/* --- Menu Containers --- */
+.menu-container, 
+.page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
+/* --- Menu Items --- */
 .item {
-  font-size: 22px;
-  font-weight: bold;
-  letter-spacing: 7px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: color 0.1s;
-  width: fit-content;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color 0.1s;
+    width: fit-content;
 }
 
-.item .pointer {
-  width: 50px;
-  height: 70px;
-  display: inline-block;
-  margin-right: 15px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+.item:hover {
+    color: #fff;
+}
 
-  background-image: none;
-  transition: all 0.1s;
+/* --- GTA Hover Pointer (The Iconic Selection Arrow) --- */
+.item .pointer {
+    width: 50px;
+    height: 70px;
+    display: inline-block;
+    margin-right: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: none;
+    transition: all 0.1s;
 }
 
 .item:hover .pointer {
-  background-image: url('assets/element/hover.gta.png');
+    background-image: url('assets/element/hover.gta.png');
 }
 
-.item:hover {
-  color: #fff;
-}
-
+/* --- Footer & Misc --- */
 .footer {
-  position: absolute;
-  bottom: 40px;
-  right: 100px;
-  font-size: 14px;
-  color: #fff;
-  letter-spacing: 2px;
-}
-
-.back-btn {
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px 20px;
+    position: absolute;
+    bottom: 40px;
+    right: 100px;
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: 2px;
 }
 
 .page-content {
-  display: none;
-  flex-direction: column;
-  min-height: 500px;
-  align-items: flex-start;
+    display: none; /* Default hidden, muncul pas item di klik via JS */
+    flex-direction: column;
+    min-height: 500px;
+    align-items: flex-start;
 }
 
-.item:hover {
-  color: #fff;
+.back-btn {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20px;
 }
