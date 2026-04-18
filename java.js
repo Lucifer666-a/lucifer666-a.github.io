@@ -91,7 +91,9 @@ function showPage(pageName) {
                    <div class="item">Project 02: Auth System</div>`,
         info: `<div class="item">Nando - Back End Developer</div>
                <div class="item">Specialized In Node.js & Golang</div>`,
-        cv: `<div class="item">Download My Resume</div>`
+        cv: `<a href="assets/profile/CV_Fernando_Hasiholan.pdf" download="CV_Fernando_Hasiholan.pdf" style="text-decoration: none; color: inherit;">
+                <div class="item">Download My Resume</div>
+            </a>`
     };
 
     document.getElementById('main-menu').style.display = 'none';
