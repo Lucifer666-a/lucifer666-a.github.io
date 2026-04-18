@@ -1,0 +1,147 @@
+/* =========================================================
+   HP / MOBILE RESPONSIVE (Max 600px)
+   ========================================================= */
+@media (max-width: 600px) {
+
+    /* --- SECTION 1 (Portfolio Home) --- */
+    .sec1::before {
+        width: 300px;  /* Kecilke lingkaran biar dak overflow */
+        height: 300px;
+    }
+
+    .portfolio {
+        font-size: 40px; /* Font judul dikecilke biar dak menuhin layar */
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .sub-title {
+        font-size: 10px;
+        letter-spacing: 3px; /* Rapatkan dikit biar dak kepotong */
+    }
+
+    .scroll {
+        transform: translateX(-50%) scale(0.8); 
+        bottom: 20px;
+    }
+
+    .umbrella {
+        width: 280px !important; /* Kecilke biar pas di dalem lingkaran merah HP */
+        height: auto;
+        /* Pastike posisi bener-bener di tengah dangan scale yang pas */
+        transform: translate(-85%, -53%) scale(0.9) !important; 
+    }
+
+    /* --- SECTION 2 (About Me) --- */
+    .sec2 {
+        flex-direction: column; /* Susun ke bawah: Foto di atas, Teks di bawah */
+        justify-content: center;
+        gap: 30px;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .text2 {
+        margin-top: 0 !important; /* Reset margin minus dari desktop */
+        align-items: center;      /* Teks jadi ke tengah */
+        order: 2;                 /* Teks pindah ke bawah foto */
+        max-width: 100%;
+    }
+
+    .profile-container {
+        width: 260px;             /* Sesuaikan ukuran foto buat HP */
+        height: 380px;
+        order: 1;                 /* Foto pindah ke posisi atas */
+        margin-bottom: 20px;
+    }
+
+    .sec2::before {
+        width: 90%;               /* Garis L-Shape nyesuaike lebar HP */
+        height: 85%;
+        left: 5%;
+        bottom: 5%;
+    }
+
+    .type_write {
+        font-size: 16px;          /* Kecilke font biar mesin tik dak meluber */
+    }
+
+
+    /* --- SECTION 3 (Stats & RE Mode) --- */
+    .menu-container, 
+    .page-content {
+        width: 100% !important;
+        padding: 0 15px;
+        align-items: center;      /* Biar menu ke tengah pas di HP */
+    }
+
+    /* Beneri lebar item menu RE Mode biar dak 'off-screen' */
+    .sec1.outbreak-active ~ .sec3 .item {
+        width: 90vw !important;    /* Pake lebar layar (viewport width) */
+        max-width: 380px;
+        font-size: 16px;
+        height: 45px;             /* Kasih ruang lebih buat jempol ngetap */
+    }
+
+    .sec1.outbreak-active ~ .sec3 .header {
+        font-size: 28px;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .sec1.outbreak-active ~ .sec3 .header::after {
+        margin-top: -35px;        /* Sesuaikan posisi teks 'Options' */
+    }
+
+    .sec1.outbreak-active ~ .sec3 .back-btn {
+        margin: 20px auto;        /* Tombol BACK ke tengah */
+    }
+}
+
+
+/* Di dalem @media (max-width: 600px) */
+
+/* 1. Pastike container menu punyo ruang buat tombol di bawah */
+.sec1.outbreak-active ~ .sec3 .menu-container {
+    min-height: 80vh; /* Kasih tinggi biar ado ruang kosong di bawah */
+    position: relative;
+    padding-bottom: 100px; /* Ruang napas buat tombol BACK */
+}
+
+/* 2. Mantepke posisi tombol BACK di bawah */
+.sec1.outbreak-active ~ .sec3 .back-btn {
+    position: absolute !important;
+    bottom: 20px; /* Jarak dari bawah layar */
+    left: 50%;
+    transform: translateX(-50%); /* Biar bener-bener di tengah horizontal */
+    width: fit-content !important;
+    padding: 10px 40px !important;
+    margin: 0 !important; /* Hapus margin otomatis */
+    z-index: 10;
+}
+
+/* responsive.css (Bagian Section 3 GTA Mode) */
+
+/* responsive.css */
+
+.sec3 .menu-container {
+    align-items: flex-start !important; /* Geser satu barisan menu ke kiri */
+    padding-left: 0% !important;      /* Atur angko ini buat geser posisi pointernyo */
+}
+
+.sec3 .item {
+    font-size: 18px; 
+    letter-spacing: 2px;
+    padding: 10px 0;
+    width: 100%;
+    
+    display: flex;
+    justify-content: flex-start; /* Ngetengahke box nyo mampir kiri */
+    align-items: center;
+    
+    /* INI KUNCINYO BIAR VITAE SEJAJAR KIRI SAMA CURRICULUM */
+    text-align: left !important; 
+    white-space: normal; 
+    word-wrap: break-word;
+    line-height: 1.2;
+}
