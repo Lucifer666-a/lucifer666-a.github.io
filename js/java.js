@@ -81,6 +81,10 @@ document.addEventListener('mousemove', (e) => {
 
 // --- 4. MENU LOGIC (SECTION 3) ---
 function showPage(pageName) {
+    if (pageName === 'projects') {
+        window.location.href = "real web porto/index.html";
+        return; // Hentikan fungsi di sini agar data di bawah tidak bentrok
+    }
     playSfx('select'); // Otomatis milih selectSfx (GTA) atau selectreSfx (RE)
     
     const contents = {
