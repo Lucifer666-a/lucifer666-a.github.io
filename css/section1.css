@@ -1,0 +1,414 @@
+/* ==========================================================================
+   SECTION 1 - BASE SETUP
+   ========================================================================== */
+.sec1 {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.page1 {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(167, 167, 167);
+  padding: 20px;
+  background-color: rgb(15, 15, 15);
+  transition: background-color 3s ease-in-out;
+}
+
+/* Background Elements (Circles) */
+.sec1::before,
+.circle_line {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sec1::before {
+  width: 450px;
+  height: 450px;
+}
+
+.circle_line {
+  width: 1550px;
+  height: 1550px;
+}
+
+/* Portfolio Button & Text */
+.title-wrap {
+  text-align: center;
+}
+
+.port-wrap {
+  animation: slideUp 1s ease-out forwards;
+  transition: top 0.3s ease, filter 0.3s ease;
+}
+
+.portfolio {
+  z-index: 2;
+  display: block;
+  width: fit-content;
+  font-size: 70px;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  color: rgb(167, 167, 167);
+  transition: color 0.3s ease, transform 0.3s ease, top 0.3s ease, filter 0.3s ease;
+}
+
+.sub-title {
+  color: rgba(167, 167, 167, 0.5);
+  font-size: 12px;
+  letter-spacing: 5px;
+  margin-top: 10px;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards 1.5s;
+}
+
+
+
+/* Red Vignette Overlay (Base) */
+.sec1::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 70%, rgba(103, 14, 4, 0.3) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 2s ease-in-out;
+  z-index: 10;
+}
+
+/* Hidden Umbrella Logo */
+.umbrella {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   INTERACTION - HOVER & DENIED
+   ========================================================================== */
+.sec1:has(.portfolio:hover) .circle_line {
+  transform: translate(-50%, -50%) scale(0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.678), inset 0 0 20px rgba(255, 255, 255, 0.4);
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.646));
+}
+
+.sec1:has(.portfolio:hover)::before {
+  transform: translate(-50%, -50%) scale(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.4);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.sec1:has(.portfolio:hover) .page1 {
+  background-color: rgb(0, 0, 0);
+}
+
+.portfolio:hover {
+  filter: drop-shadow(0 0 5px rgba(148, 147, 147, 0.8));
+  top: -7px;
+  color: white;
+}
+
+.portfolio::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease;
+}
+
+.portfolio:hover::after {
+  transform: scaleX(1);
+}
+
+.portfolio.denied {
+  color: #8b0000 !important;
+  text-shadow: 0 0 20px rgb(160, 0, 0);
+  animation: shake 0.3s ease-in-out;
+  /* Memicu keyframe shake */
+}
+
+/* ==========================================================================
+   SCROLL MOUSE HINT (Bottom Section)
+   ========================================================================== */
+.scroll {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30%);
+  opacity: 0;
+  animation: slideUpScroll 1s ease-out forwards 3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+}
+
+.scroll-text {
+  color: rgb(167, 167, 167);
+}
+
+.mouse {
+  width: 25px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: white;
+  border-radius: 2px;
+  margin-top: 7px;
+  animation: scrollAnim 2s infinite;
+}
+
+
+/* ==========================================================================
+   TRIGGERED STATE - OUTBREAK ACTIVE (SECTION 1)
+   ========================================================================== */
+.sec1.outbreak-active .page1 {
+  background-color: #0c0202;
+}
+
+.sec1.outbreak-active::after {
+  opacity: 1;
+  animation: smoothVignettePulse 4s infinite alternate ease-in-out;
+}
+
+.screen-shake {
+  animation: shakeScreen 0.5s infinite;
+}
+
+/* Glowing Red Circles */
+.sec1.outbreak-active::before,
+.sec1.outbreak-active .circle_line {
+  border: 1.5px solid rgba(139, 0, 0, 0.8);
+  box-shadow: 0 0 15px rgba(139, 0, 0, 0.6), inset 0 0 15px rgba(139, 0, 0, 0.4);
+  filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.2));
+  transition: all 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sec1.outbreak-active .circle_line {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Umbrella Logo Animation */
+.sec1.outbreak-active .umbrella {
+  opacity: 0.15;
+  animation: spinOutbreak 5s ease-out forwards;
+}
+
+/* ==========================================================================
+   HP / MOBILE RESPONSIVE - SECTION 1 (Portfolio Home)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .sec1::before {
+    width: 300px;
+    /* Kecilkan lingkaran biar tidak overflow */
+    height: 300px;
+  }
+
+  .portfolio {
+    font-size: 40px;
+    /* Font judul dikecilkan biar tidak menuhin layar */
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .sub-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    /* Rapatkan dikit biar tidak kepotong */
+  }
+
+  .scroll {
+    transform: translateX(-50%) scale(0.8);
+    bottom: 20px;
+  }
+
+  .umbrella {
+    width: 280px !important;
+    /* Kecilkan biar pas di dalem lingkaran merah HP */
+    height: auto;
+    /* Pastikan posisi bener-bener di tengah dengan scale yang pas */
+    transform: translate(-85%, -53%) scale(0.9) !important;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 1 ANIMATIONS (INTRO, DENIED, & OUTBREAK)
+   ========================================================================== */
+@keyframes slideUp {
+  0% {
+    transform: translateY(30%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpScroll {
+  0% {
+    transform: translateX(-50%) translateY(30%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scrollAnim {
+  0% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-40px);
+  }
+
+  50% {
+    transform: translateX(40px);
+  }
+
+  75% {
+    transform: translateX(-40px);
+  }
+}
+
+@keyframes spinOutbreak {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+  }
+
+  20% {
+    opacity: 0.2;
+  }
+
+  80% {
+    transform: translate(-50%, -50%) scale(1.15) rotate(1130deg);
+  }
+
+  100% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(1.2) rotate(1100deg);
+  }
+}
+
+@keyframes shakeScreen {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+@keyframes smoothVignettePulse {
+  0% {
+    opacity: 0.3;
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 0.8;
+    filter: blur(0px);
+  }
+}
