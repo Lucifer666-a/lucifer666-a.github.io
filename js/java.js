@@ -35,13 +35,13 @@ const playSfx = (type) => {
         targetAudio = isRE ? sfx.re[type] : sfx.gta[type];
     } else {
         // Jika input adalah object audio langsung (global sfx)
-        targetAudio = sfx.global[type] || type; 
+        targetAudio = sfx.global[type] || type;
     }
 
     if (targetAudio instanceof Audio) {
         targetAudio.pause();
         targetAudio.currentTime = 0;
-        targetAudio.play().catch(() => {});
+        targetAudio.play().catch(() => { });
     }
 };
 
@@ -86,7 +86,7 @@ function showPage(pageName) {
         return; // Hentikan fungsi di sini agar data di bawah tidak bentrok
     }
     playSfx('select'); // Otomatis milih selectSfx (GTA) atau selectreSfx (RE)
-    
+
     const contents = {
         contact: `<div class="item">Email: nando@de.com</div>
                   <div class="item">Instagram: nand_2956</div>
@@ -103,7 +103,7 @@ function showPage(pageName) {
     document.getElementById('main-menu').style.display = 'none';
     const contentPage = document.getElementById('content-page');
     contentPage.style.display = 'flex';
-    
+
     document.getElementById('header').innerText = pageName;
     document.getElementById('page-data').innerHTML = contents[pageName] || '';
 }

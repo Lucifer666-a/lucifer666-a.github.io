@@ -4,6 +4,7 @@
     transform: translateY(30%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -15,6 +16,7 @@
     transform: translateX(-50%) translateY(30%);
     opacity: 0;
   }
+
   100% {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
@@ -22,19 +24,41 @@
 }
 
 @keyframes scrollAnim {
-  0% { opacity: 1; transform: translateY(-3px);}
-  100% { opacity: 0; transform: translateY(5px);}
+  0% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
 }
 
 @keyframes fadeIn {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0);}
-  25% { transform: translateX(-40px);}
-  50% { transform: translateX(40px);}
-  75% { transform: translateX(-40px);}
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-40px);
+  }
+
+  50% {
+    transform: translateX(40px);
+  }
+
+  75% {
+    transform: translateX(-40px);
+  }
 }
 
 @keyframes spinOutbreak {
@@ -42,12 +66,16 @@
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
   }
+
   20% {
-    opacity: 0.2; /* Muncul perlahan di awal */
+    opacity: 0.2;
+    /* Muncul perlahan di awal */
   }
+
   80% {
     transform: translate(-50%, -50%) scale(1.15) rotate(1130deg);
   }
+
   100% {
     opacity: 0.2;
     transform: translate(-50%, -50%) scale(1.2) rotate(1100deg);
@@ -55,39 +83,86 @@
 }
 
 @keyframes shakeScreen {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 @keyframes smoothVignettePulse {
-    0% {
-        opacity: 0.3; /* Merah sangat tipis */
-        filter: blur(2px);
-    }
-    100% {
-        opacity: 0.8; /* Merah menebal tipis */
-        filter: blur(0px);
-    }
+  0% {
+    opacity: 0.3;
+    /* Merah sangat tipis */
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 0.8;
+    /* Merah menebal tipis */
+    filter: blur(0px);
+  }
 }
 
 /* kumpulan keyframes */
 @keyframes typing {
-  from { width: 0; }
-  to { width: 100%; } 
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes blink {
-  from, to { border-color: transparent; }
-  50% { border-color: rgb(0, 0, 0); }
+
+  from,
+  to {
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: rgb(0, 0, 0);
+  }
 }
 
 @keyframes slideFromLeft {
@@ -95,6 +170,7 @@
     transform: translateX(-50%);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0%);
     opacity: 1;
@@ -106,6 +182,7 @@
     transform: scaleY(0);
     opacity: 0;
   }
+
   to {
     transform: scaleY(1);
     opacity: 1;
@@ -113,21 +190,52 @@
 }
 
 @keyframes glitch {
-  0% { transform: translate(0) scale(1.02); }
-  20% { transform: translate(-0.5px, 0.25px) scale(1.02); }
-  40% { transform: translate(-0.5px, -0.25px) scale(1.02); }
-  60% { transform: translate(0.5px, 0.25px) scale(1.02); }
-  80% { transform: translate(0.5px, -0.25px) scale(1.02); }
-  100% { transform: translate(0) scale(1.02); }
+  0% {
+    transform: translate(0) scale(1.02);
+  }
+
+  20% {
+    transform: translate(-0.5px, 0.25px) scale(1.02);
+  }
+
+  40% {
+    transform: translate(-0.5px, -0.25px) scale(1.02);
+  }
+
+  60% {
+    transform: translate(0.5px, 0.25px) scale(1.02);
+  }
+
+  80% {
+    transform: translate(0.5px, -0.25px) scale(1.02);
+  }
+
+  100% {
+    transform: translate(0) scale(1.02);
+  }
 }
 
 @keyframes glitch-fixed {
-  0% {margin: 0;}
-  25% {margin: -2px 2px;}
-  50% {margin: 2px -2px;}
-  75% {margin: -1px -1px;}
-  100% {margin: 0;}
-  
+  0% {
+    margin: 0;
+  }
+
+  25% {
+    margin: -2px 2px;
+  }
+
+  50% {
+    margin: 2px -2px;
+  }
+
+  75% {
+    margin: -1px -1px;
+  }
+
+  100% {
+    margin: 0;
+  }
+
 }
 
 /* Media Query tetap sama */
@@ -140,10 +248,12 @@
     height: auto;
     min-height: 100vh;
   }
+
   .text2 {
     width: 80%;
     text-align: center;
   }
+
   .profile {
     width: 80%;
     max-width: 300px;

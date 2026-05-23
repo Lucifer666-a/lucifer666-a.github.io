@@ -4,13 +4,13 @@ import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/fi
 
 // Konfigurasi Firebase asli milikmu
 const firebaseConfig = {
-  apiKey: "AIzaSyBmeQH4b3_c2PboAsjv7Xpqts0LFuDhhmc",
-  authDomain: "fir-app-17717.firebaseapp.com",
-  projectId: "fir-app-17717",
-  storageBucket: "fir-app-17717.firebasestorage.app",
-  messagingSenderId: "665964692179",
-  appId: "1:665964692179:web:9671d0259cb0c2d8f58a26",
-  measurementId: "G-ZMJBK15950"
+    apiKey: "AIzaSyBmeQH4b3_c2PboAsjv7Xpqts0LFuDhhmc",
+    authDomain: "fir-app-17717.firebaseapp.com",
+    projectId: "fir-app-17717",
+    storageBucket: "fir-app-17717.firebasestorage.app",
+    messagingSenderId: "665964692179",
+    appId: "1:665964692179:web:9671d0259cb0c2d8f58a26",
+    measurementId: "G-ZMJBK15950"
 };
 
 // Inisialisasi Firebase & Firestore

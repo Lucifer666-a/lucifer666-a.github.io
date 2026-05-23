@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Landing Page</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 
@@ -57,7 +59,7 @@
         </p>
       </div>
     </div>
-    
+
     <div class="profile-container" onclick="toggleTheme()">
       <div class="profile-card" id="profileCard">
         <img src="assets/profile/pro.jpg" class="profile front">
@@ -66,7 +68,7 @@
     </div>
   </section>
 
-  
+
 
 
 
@@ -78,20 +80,20 @@
     <div class="screen">
       <div class="header" id="header">Stats</div>
 
-    <div id="main-menu" class="menu-container">
-      <div class="item" onclick="showPage('info')">
-        <span class="pointer"></span> Info
+      <div id="main-menu" class="menu-container">
+        <div class="item" onclick="showPage('info')">
+          <span class="pointer"></span> Info
+        </div>
+        <div class="item" onclick="showPage('cv')">
+          <span class="pointer"></span> Curriculum Vitae
+        </div>
+        <div class="item" onclick="showPage('projects')">
+          <span class="pointer"></span> Projects
+        </div>
+        <div class="item" onclick="showPage('contact')">
+          <span class="pointer"></span> Contact
+        </div>
       </div>
-      <div class="item" onclick="showPage('cv')">
-        <span class="pointer"></span> Curriculum Vitae
-      </div>
-      <div class="item" onclick="showPage('projects')">
-        <span class="pointer"></span> Projects
-      </div>
-      <div class="item" onclick="showPage('contact')">
-        <span class="pointer"></span> Contact
-      </div>
-    </div>
 
       <div id="content-page" class="page-content" style="display: none;">
         <div id="page-data"></div>
@@ -107,4 +109,5 @@
   </section>
   <script src="js//java.js"></script>
 </body>
+
 </html>

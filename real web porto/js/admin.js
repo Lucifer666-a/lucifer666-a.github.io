@@ -4,13 +4,13 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
 
 // Konfigurasi Firebase asli milikmu
 const firebaseConfig = {
-  apiKey: "AIzaSyBmeQH4b3_c2PboAsjv7Xpqts0LFuDhhmc",
-  authDomain: "fir-app-17717.firebaseapp.com",
-  projectId: "fir-app-17717",
-  storageBucket: "fir-app-17717.firebasestorage.app",
-  messagingSenderId: "665964692179",
-  appId: "1:665964692179:web:9671d0259cb0c2d8f58a26",
-  measurementId: "G-ZMJBK15950"
+    apiKey: "AIzaSyBmeQH4b3_c2PboAsjv7Xpqts0LFuDhhmc",
+    authDomain: "fir-app-17717.firebaseapp.com",
+    projectId: "fir-app-17717",
+    storageBucket: "fir-app-17717.firebasestorage.app",
+    messagingSenderId: "665964692179",
+    appId: "1:665964692179:web:9671d0259cb0c2d8f58a26",
+    measurementId: "G-ZMJBK15950"
 };
 
 // Inisialisasi
@@ -70,7 +70,7 @@ btnLogout.addEventListener("click", () => {
 function loadAdminData() {
     onSnapshot(collection(db, "projects"), (snapshot) => {
         tableBody.innerHTML = "";
-        
+
         if (snapshot.empty) {
             tableBody.innerHTML = `<tr><td class="py-4 text-gray-500 text-center" colspan="2">Belum ada project terdaftar.</td></tr>`;
             return;
@@ -109,7 +109,7 @@ function loadAdminData() {
 // Proses Menambah Data Baru (CREATE)
 projectForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     const newProject = {
         judul: document.getElementById("p-title").value,
         deskripsi: document.getElementById("p-desc").value,
