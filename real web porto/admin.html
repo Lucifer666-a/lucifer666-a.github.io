@@ -22,14 +22,16 @@
             <p class="text-gray-400 text-sm text-center mb-6">Silakan login untuk mengelola project portofolio.</p>
             <form id="login-form" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Email
-                        Address</label>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                        Email Address
+                    </label>
                     <input type="email" id="login-email" required
                         class="w-full bg-[#1f2937] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500 transition">
                 </div>
                 <div>
-                    <label
-                        class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Password</label>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                        Password
+                    </label>
                     <input type="password" id="login-password" required
                         class="w-full bg-[#1f2937] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500 transition">
                 </div>
@@ -55,8 +57,11 @@
         </header>
 
         <main class="flex-1 max-w-6xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
             <div class="bg-[#111827] border border-gray-800 p-6 rounded-xl h-fit">
-                <h3 class="text-lg font-bold text-white mb-4">Tambah Project Baru</h3>
+                <input type="hidden" id="p-id" value="">
+                
+                <h3 id="form-title" class="text-lg font-bold text-white mb-4">Tambah Project Baru</h3>
                 <form id="project-form" class="space-y-4">
                     <div>
                         <label class="block text-xs text-gray-400 mb-1">Judul Project</label>
@@ -78,10 +83,17 @@
                         <input type="url" id="p-link" placeholder="https://..."
                             class="w-full bg-[#1f2937] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
                     </div>
-                    <button type="submit"
-                        class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-medium py-2 rounded-lg text-sm transition">
-                        Simpan ke Database
-                    </button>
+                    
+                    <div class="space-y-2">
+                        <button type="submit" id="btn-submit"
+                            class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-medium py-2 rounded-lg text-sm transition">
+                            Simpan ke Database
+                        </button>
+                        <button type="button" id="btn-cancel"
+                            class="hidden w-full bg-gray-700 hover:bg-gray-600 text-gray-200 font-medium py-2 rounded-lg text-sm transition">
+                            Batal Edit
+                        </button>
+                    </div>
                 </form>
             </div>
 
@@ -92,11 +104,11 @@
                         <thead>
                             <tr class="border-b border-gray-800 text-gray-400 text-xs uppercase tracking-wider">
                                 <th class="pb-3">Project</th>
-                                <th class="pb-3 w-24">Aksi</th>
+                                <th class="pb-3 w-32 text-right">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="admin-table-body" class="divide-y divide-gray-800">
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </div>
