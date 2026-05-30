@@ -75,7 +75,7 @@ function toggleTheme() {
 // ==========================================================================
 function showPage(pageName) {
     if (pageName === 'projects') {
-        window.location.href = "real web porto/index.html";
+        window.location.href = "project/index.html";
         return;
     }
     playSfx('select');
