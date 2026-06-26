@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-// Konfigurasi Firebase asli milikmu
+// Konfigurasi Firebase asli milikmu (TETAP UTUH & TERHUBUNG)
 const firebaseConfig = {
     apiKey: "AIzaSyBmeQH4b3_c2PboAsjv7Xpqts0LFuDhhmc",
     authDomain: "fir-app-17717.firebaseapp.com",
@@ -38,20 +38,24 @@ onSnapshot(collection(db, "projects"), (snapshot) => {
     snapshot.forEach((doc) => {
         const data = doc.data();
 
-        // Template HTML untuk kartu project bertema gelap modern
+        // Template HTML untuk kartu project bertema Monokrom Modern dengan Gradasi
         const projectCard = `
-            <div class="bg-[#111827] border border-gray-800 rounded-xl overflow-hidden shadow-lg hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+            <div class="bg-[#111827] border border-gray-800 rounded-xl overflow-hidden shadow-lg hover:border-gray-600 transition duration-300 flex flex-col justify-between group/card">
                 <div>
-                    <img src="${data.gambar || 'https://picsum.photos/400/250'}" alt="${data.judul}" class="w-full h-48 object-cover opacity-80 hover:opacity-100 transition">
+                    <!-- Efek gambar: saat card di-hover, gambar akan sedikit lebih terang secara smooth -->
+                    <img src="${data.gambar || 'https://picsum.photos/400/250'}" alt="${data.judul}" class="w-full h-48 object-cover opacity-70 group-hover/card:opacity-90 transition duration-300">
                     <div class="p-5">
-                        <h3 class="text-lg font-bold text-white mb-2">${data.judul}</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">${data.deskripsi}</p>
+                        <h3 class="text-base font-bold text-white mb-2 tracking-wide">${data.judul}</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">${data.deskripsi}</p>
                     </div>
                 </div>
+                
+                <!-- Tombol dengan gradasi monokrom perak tipis -->
                 <div class="p-5 pt-0">
-                    <a href="${data.link || '#'}" target="_blank" class="inline-flex items-center text-xs font-semibold text-cyan-400 hover:text-cyan-300 gap-1 group">
-                        Lihat Project 
-                        <span class="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    <a href="${data.link || '#'}" target="_blank" 
+                       class="w-full inline-flex items-center justify-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 hover:from-white hover:via-gray-100 hover:to-gray-300 text-gray-300 hover:text-gray-900 border border-gray-800 hover:border-white text-xs font-semibold py-2.5 rounded-lg transition-all duration-300 gap-1.5 shadow-sm">
+                        <span>Lihat Project</span> 
+                        <span class="transform group-hover/card:translate-x-1 transition-transform">&rarr;</span>
                     </a>
                 </div>
             </div>
