@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nando | Profile Resume</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d0f12;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            /* Background gradasi halus biar tidak flat hitam pekat */
+            background-image: radial-gradient(circle at top right, #1a1e24 0%, #0d0f12 60%);
+        }
+        .font-game { font-family: 'Space Grotesk', sans-serif; }
+
+        /* 1. Efek Slide Up + Fade In Halus Saat Page di-Load */
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+                filter: blur(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* 2. Efek Cahaya Memancar Lembut Untuk Border Slot Skill (Hover) */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.0);
+            }
+            50% {
+                box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.1);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.0);
+            }
+        }
+
+        /* Utility Classes */
+        .animate-load {
+            animation: slideUpFade 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .skill-card-hover:hover {
+            animation: pulseGlow 1.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-6 opacity-0 transition-opacity duration-300" onload="document.body.classList.remove('opacity-0')">
+
+    <header class="w-full max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center border-b border-white/10 pb-4 mb-8 gap-4">
+        <div class="flex items-center gap-6">
+            <a href="../index.html" class="text-xs font-bold font-game uppercase tracking-wider text-white/40 hover:text-white transition-colors">
+                &lt; ESC_RETURN
+            </a>
+            <div class="h-8 flex items-center px-4 bg-white text-gray-950 font-game font-bold text-xs uppercase tracking-wider rounded-sm">
+                SUMMARY // CV
+            </div>
+        </div>
+        <div class="flex items-center gap-4 text-[11px] font-game text-white/50 tracking-wide">
+            <span>DATA STATUS: <span class="text-white font-bold">OPTIMIZED</span></span>
+            <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+            <span>VER: 4.2.0</span>
+        </div>
+    </header>
+
+    <main class="animate-load w-full max-w-6xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+      <!-- PANEL KIRI: PREVIEW RESUME KERTAS & DOWNLOAD (4 Kolom) -->
+        <!-- Catatan: overflow-hidden dihapus dan diganti overflow-visible biar fotonya bisa keluar bingkai -->
+        <div class="lg:col-span-4 bg-white text-gray-950 p-8 rounded-lg flex flex-col justify-between shadow-xl relative overflow-visible mt-16 lg:mt-20">
+            <!-- Dekorasi Garis Sudut UI Game (Disesuaikan agar tidak memotong foto) -->
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gray-200 rounded-t-lg"></div>
+            
+            <div class="w-full flex flex-col">
+                <!-- TEMPAT NARO FOTO: Efek Lembar Kertas Mencuat ke Atas -->
+                <!-- Kamu tinggal ganti 'path_ke_foto_cv_kamu.jpg' dengan file screenshot CV-mu -->
+                <div class="-mt-24 mb-6 self-center w-4/5 aspect-[3/4] bg-gray-100 border border-gray-300 shadow-[0_15px_30px_rgba(0,0,0,0.25)] rounded-sm overflow-hidden transform -rotate-1 hover:rotate-0 transition-transform duration-300 group">
+                    <img src="../assets/profile/preview_cv.jpg" alt="CV Preview" class="w-full h-full object-cover object-top opacity-95 group-hover:opacity-100 transition-opacity">
+                </div>
+
+                <span class="text-[10px] font-game font-bold uppercase tracking-widest text-gray-400 block mb-1">FILE_ACCESS</span>
+                <h2 class="text-2xl font-extrabold font-game tracking-tight leading-none text-gray-900 uppercase">
+                    CURRICULUM<br><span class="text-gray-500">VITAE</span>
+                </h2>
+                <p class="text-xs text-gray-600 mt-4 leading-relaxed font-medium">
+                    Dokumen terstruktur yang memuat informasi kualifikasi akademik, keahlian teknis pengembangan backend, serta manajemen pangkalan data cloud.
+                </p>
+            </div>
+
+            <!-- BUTTON DOWNLOAD DI PALING BAWAH -->
+            <div class="w-full mt-8">
+                <a href="../assets/profile/CV_Fernando_Hasiholan.pdf" download="CV_Fernando_Hasiholan.pdf" 
+                   class="w-full block text-center bg-gray-950 hover:bg-gray-800 text-white font-game font-bold text-xs py-4 tracking-widest transition-all rounded-md shadow-lg uppercase">
+                    DOWNLOAD_RESUME
+                </a>
+            </div>
+        </div>
+
+        <div class="lg:col-span-8 bg-white/5 border border-white/10 p-8 rounded-lg flex flex-col justify-between backdrop-blur-md">
+            <div class="w-full">
+                <div class="text-xs font-game font-bold tracking-widest text-white/40 uppercase border-b border-white/10 pb-3 mb-6">
+                    // EXPERTISE_LOADOUT
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    
+                  <div class="bg-white/5 p-5 rounded-md hover:bg-white/10 transition-all group flex flex-col justify-between skill-card-hover">
+                      <div>
+                          <div class="flex justify-between items-center text-[10px] font-game font-bold tracking-wider text-white/40">
+                              <span>SLOT_01</span>
+                              <span class="text-white group-hover:text-cyan-400 transition-colors">CORE</span>
+                          </div>
+                          <div class="flex items-center gap-3 mt-2.5">
+                              <div class="text-xl text-white/60 group-hover:text-[#6cc24a] transition-colors flex gap-2">
+                                  <i class="fab fa-node-js"></i>
+                                  <i class="fas fa-terminal text-sm"></i>
+                              </div>
+                              <h4 class="text-base font-bold font-game text-white">Node.js & Golang</h4>
+                          </div>
+                          <p class="text-xs text-white/60 mt-2 leading-normal font-medium">Pengembangan arsitektur backend API yang efisien dengan manajemen data asinkronus.</p>
+                      </div>
+                  </div>
+
+                  <div class="bg-white/5 p-5 rounded-md hover:bg-white/10 transition-all group flex flex-col justify-between skill-card-hover">
+                      <div>
+                          <div class="flex justify-between items-center text-[10px] font-game font-bold tracking-wider text-white/40">
+                              <span>SLOT_02</span>
+                              <span class="text-white group-hover:text-amber-400 transition-colors">DATA</span>
+                          </div>
+                          <div class="flex items-center gap-3 mt-2.5">
+                              <div class="text-xl text-white/60 group-hover:text-amber-500 transition-colors flex gap-2">
+                                  <i class="fas fa-database text-lg"></i>
+                                  <i class="fas fa-fire text-base"></i>
+                              </div>
+                              <h4 class="text-base font-bold font-game text-white">SQL & NoSQL</h4>
+                          </div>
+                          <p class="text-xs text-white/60 mt-2 leading-normal font-medium">Skema relasional database, pengindeksan data kueri, dan cloud sinkronisasi Firestore.</p>
+                      </div>
+                  </div>
+
+                  <div class="bg-white/5 p-5 rounded-md hover:bg-white/10 transition-all group flex flex-col justify-between skill-card-hover">
+                      <div>
+                          <div class="flex justify-between items-center text-[10px] font-game font-bold tracking-wider text-white/40">
+                              <span>SLOT_03</span>
+                              <span class="text-white group-hover:text-indigo-400 transition-colors">LOGIC</span>
+                          </div>
+                          <div class="flex items-center gap-3 mt-2.5">
+                              <div class="text-xl text-white/60 group-hover:text-[#4f5b93] transition-colors flex gap-2">
+                                  <i class="fas fa-code text-base"></i>
+                                  <i class="fab fa-php"></i>
+                              </div>
+                              <h4 class="text-base font-bold font-game text-white">C++ & PHP Core</h4>
+                          </div>
+                          <p class="text-xs text-white/60 mt-2 leading-normal font-medium">Struktur kontrol pemrograman terarah untuk optimasi fungsional sistem logika inti.</p>
+                      </div>
+                  </div>
+
+                  <div class="bg-white/5 p-5 rounded-md hover:bg-white/10 transition-all group flex flex-col justify-between skill-card-hover">
+                      <div>
+                          <div class="flex justify-between items-center text-[10px] font-game font-bold tracking-wider text-white/40">
+                              <span>SLOT_04</span>
+                              <span class="text-white group-hover:text-yellow-400 transition-colors">BASE</span>
+                          </div>
+                          <div class="flex items-center gap-3 mt-2.5">
+                              <div class="text-xl text-white/60 group-hover:text-[#f7df1e] transition-colors flex gap-2">
+                                  <i class="fab fa-js"></i>
+                                  <i class="fab fa-html5 text-lg"></i>
+                              </div>
+                              <h4 class="text-base font-bold font-game text-white">JavaScript & CSS</h4>
+                          </div>
+                          <p class="text-xs text-white/60 mt-2 leading-normal font-medium">Implementasi antarmuka pengguna interaktif yang responsif dengan performa rendering tinggi.</p>
+                      </div>
+                  </div>
+
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-white/5 text-[10px] font-game text-white/30 tracking-wider uppercase">
+                ALL SYSTEMS OPERATIONAL // READY_FOR_DEPLOYMENT
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto text-center text-[10px] font-game text-white/20 tracking-widest mt-8 uppercase">
+        NANDO INTERACTIVE INTERFACE &copy; 2026 // ALL RIGHTS RESERVED
+    </footer>
+
+</body>
+</html>

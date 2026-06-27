@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nando | Character Status</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+        
+        body {
+            background-color: #05070c;
+            color: #ffffff;
+            font-family: 'Courier Prime', monospace;
+            /* Grid background khas UI game retro */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Efek teks glow tipis */
+        .glow-text {
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        /* 1. Animasi Garis Scanline Monitor Tabung Berjalan */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* 2. Animasi Glitch Teks Kaku Saat Halaman di-Load */
+        @keyframes bootUp {
+            0% { opacity: 0; transform: scaleY(0); filter: blur(2px); }
+            10% { opacity: 1; transform: scaleY(1); }
+            15% { opacity: 0; }
+            20% { opacity: 1; filter: blur(0); }
+            60% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+
+        /* Class untuk mengaktifkan animasi boot-up pada frame */
+        .boot-anim {
+            animation: bootUp 2.4s steps(4) forwards;
+        }
+
+        /* Animasi Bar Mengisi dari Kiri ke Kanan secara Patah-patah */
+        @keyframes barGrow {
+            from { width: 0%; }
+        }
+
+        /* Animasi Flicker Tipis untuk Border Pas Di-hover */
+        @keyframes borderFlicker {
+            0% { border-color: #374151; }
+            50% { border-color: #ffffff; box-shadow: 0 0 8px rgba(255, 255, 255, 0.2); }
+            100% { border-color: #374151; }
+        }
+
+        /* Class Hover untuk Frame */
+        .rpg-frame-hover:hover {
+            animation: borderFlicker 0.2s steps(2) infinite;
+            cursor: crosshair;
+        }
+
+        /* Animasi Kursor Ketik Kedip-Kedip */
+        .cursor-blink::after {
+            content: '_';
+            animation: blink 0.8s steps(2) infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4">
+  <div class="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+    <div class="w-full h-24 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-30 select-none" 
+         style="animation: scanline 6s linear infinite;">
+    </div>
+  </div>
+    <header class="w-full max-w-5xl mx-auto border-2 border-gray-700 bg-[#0c0f17] p-4 flex justify-between items-center mb-6">
+        <a href="../index.html" class="text-xs text-gray-400 hover:text-white hover:underline uppercase tracking-wider">
+            &lt;&lt; BACK TO MAIN_MENU
+        </a>
+        <span class="text-xs font-bold tracking-widest glow-text">STATUS:[CHARACTER_INFO]</span>
+    </header>
+
+<main class="boot-anim w-full max-w-5xl mx-auto flex-1 grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+    
+    <!-- FRAME KIRI: Ditambahkan class 'rpg-frame-hover' -->
+    <div class="md:col-span-5 border-2 border-gray-700 bg-[#0c0f17] p-6 flex flex-col justify-between rpg-frame-hover transition-all">
+        <div>
+            <div class="w-full aspect-square border border-gray-600 bg-[#05070c] flex items-center justify-center text-gray-500 text-sm mb-6 font-bold tracking-widest">
+                [ NO_IMAGE_AVAILABLE ]
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <div class="text-[11px] text-gray-500 uppercase tracking-wider">NAME_</div>
+                    <div class="text-base font-bold text-white tracking-wide glow-text">FERNANDO HASIHOLAN</div>
+                </div>
+                <div>
+                    <div class="text-[11px] text-gray-500 uppercase tracking-wider">CLASS_</div>
+                    <div class="text-sm font-bold text-gray-300">MANAGEMENT OF INFORMATICS</div>
+                </div>
+                <div class="border-t border-gray-800 pt-3">
+                    <div class="text-[11px] text-gray-500 uppercase tracking-wider mb-1">BIOGRAPHY_</div>
+                    <!-- Ditambahkan ID 'typewriter-bio' dan class kursor kedip -->
+                    <p id="typewriter-bio" class="text-xs text-gray-400 leading-relaxed uppercase cursor-blink"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between text-xs font-mono text-emerald-400">
+            <span>STATUS: [ONLINE]</span>
+            <span class="w-2 h-2 bg-emerald-500 animate-pulse"></span>
+        </div>
+    </div>
+
+    <!-- FRAME KANAN: Ditambahkan class 'rpg-frame-hover' -->
+    <div class="md:col-span-7 border-2 border-gray-700 bg-[#0c0f17] p-6 flex flex-col justify-between rpg-frame-hover transition-all">
+        <div>
+            <div class="text-xs font-bold tracking-widest border-b-2 border-gray-700 pb-2 mb-6 text-gray-400 uppercase">
+                &gt; CORE_ATTRIBUTES
+            </div>
+            
+            <div class="space-y-6">
+                <!-- STAT 1: DATABASE -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold tracking-wide">
+                        <span class="text-gray-300">DATABASE_MANAGEMENT [SQL/NoSQL]</span>
+                        <span class="text-white glow-text">85/100</span>
+                    </div>
+                    <div class="w-full border border-gray-600 bg-[#05070c] p-0.5 flex">
+                        <!-- Ditambahkan durasi animasi grow patah-patah -->
+                        <div class="bg-white h-3" style="width: 85%; animation: barGrow 1s steps(10) forwards;"></div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 uppercase">Perancangan struktur relasi tabel database & optimasi Firebase Firestore.</p>
+                </div>
+
+                <!-- STAT 2: BACKEND LOGIC -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold tracking-wide">
+                        <span class="text-gray-300">BACKEND_LOGIC [C++/PHP]</span>
+                        <span class="text-white glow-text">80/100</span>
+                    </div>
+                    <div class="w-full border border-gray-600 bg-[#05070c] p-0.5 flex">
+                        <div class="bg-white h-3" style="width: 80%; animation: barGrow 1s steps(10) forwards;"></div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 uppercase">Implementasi struktur data logika kodingan inti sistem.</p>
+                </div>
+
+                <!-- STAT 3: WEB CORE -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold tracking-wide">
+                        <span class="text-gray-300">WEB_INTERFACE [JS/HTML/CSS]</span>
+                        <span class="text-white glow-text">75/100</span>
+                    </div>
+                    <div class="w-full border border-gray-600 bg-[#05070c] p-0.5 flex">
+                        <div class="bg-white h-3" style="width: 75%; animation: barGrow 1s steps(10) forwards;"></div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 uppercase">Pembuatan arsitektur antarmuka aplikasi web fungsional.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-gray-800 text-[11px] text-gray-500 uppercase tracking-wider">
+            PERFORMANCE_METRICS: EXCELLENT // OBJECTIVE: FULL_STACK_DEV
+        </div>
+    </div>
+
+</main>
+
+    <footer class="w-full max-w-5xl mx-auto border-2 border-gray-700 bg-[#0c0f17] p-3 text-center text-[10px] text-gray-600 tracking-widest mt-6">
+        SYSTEM_STATUS_v4.0.0 // USER: NANDO_FHN
+    </footer>
+
+
+    <script>
+    // Mekanik Typewriter Efek untuk Teks Bio
+    const bioText = "Fokus pada pengelolaan data administrasi digital dan pengembangan web. Suka membangun aplikasi yang fungsional, bersih, dan efisien. Mengubah data mentah menjadi sistem informasi yang terstruktur.";
+    const bioContainer = document.getElementById('typewriter-bio');
+    let index = 0;
+
+    function typeWriter() {
+        if (index < bioText.length) {
+            bioContainer.innerHTML += bioText.charAt(index);
+            index++;
+            // Kecepatan mengetik kaku (40ms per karakter)
+            setTimeout(typeWriter, 40);
+        } else {
+            // Hilangkan kursor berkedip setelah selesai mengetik
+            bioContainer.classList.remove('cursor-blink');
+        }
+    }
+
+    // Jalankan setelah efek boot up layar selesai berkedip
+    setTimeout(typeWriter, 500);
+</script>
+</body>
+</html>

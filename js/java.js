@@ -79,7 +79,14 @@ function showPage(pageName) {
         return;
     }
     playSfx('select');
-
+    if (pageName === 'info') {
+            window.location.href = "info/index.html";
+            return;
+        }
+    if (pageName === 'cv') {
+        window.location.href = "cv/index.html";
+        return;
+    }
     const contents = {
         contact: `<div class="item">Email: nando@de.com</div>
                   <div class="item">Instagram: nand_2956</div>
