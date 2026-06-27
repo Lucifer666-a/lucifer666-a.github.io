@@ -40,7 +40,8 @@ onSnapshot(collection(db, "projects"), (snapshot) => {
 
         // Template HTML untuk kartu project bertema Monokrom Modern dengan Gradasi
         const projectCard = `
-            <div class="bg-[#111827] border border-gray-800 rounded-xl overflow-hidden shadow-lg hover:border-gray-600 transition duration-300 flex flex-col justify-between group/card">
+            <div class="project-card">
+            <div class="bg-[#111827] border border-gray-800 rounded-xl overflow-hidden shadow-lg hover:border-gray-600 flex flex-col justify-between group/card">
                 <div>
                     <!-- Efek gambar: saat card di-hover, gambar akan sedikit lebih terang secara smooth -->
                     <img src="${data.gambar || 'https://picsum.photos/400/250'}" alt="${data.judul}" class="w-full h-48 object-cover opacity-70 group-hover/card:opacity-90 group-hover/card:scale-105 transition duration-500">
@@ -58,6 +59,7 @@ onSnapshot(collection(db, "projects"), (snapshot) => {
                         <span class="transform group-hover/card:translate-x-1 transition-transform">&rarr;</span>
                     </a>
                 </div>
+            </div>
             </div>
         `;
 
