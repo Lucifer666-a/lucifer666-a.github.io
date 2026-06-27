@@ -43,7 +43,7 @@ onSnapshot(collection(db, "projects"), (snapshot) => {
             <div class="bg-[#111827] border border-gray-800 rounded-xl overflow-hidden shadow-lg hover:border-gray-600 transition duration-300 flex flex-col justify-between group/card">
                 <div>
                     <!-- Efek gambar: saat card di-hover, gambar akan sedikit lebih terang secara smooth -->
-                    <img src="${data.gambar || 'https://picsum.photos/400/250'}" alt="${data.judul}" class="w-full h-48 object-cover opacity-70 group-hover/card:opacity-90 transition duration-300">
+                    <img src="${data.gambar || 'https://picsum.photos/400/250'}" alt="${data.judul}" class="w-full h-48 object-cover opacity-70 group-hover/card:opacity-90 group-hover/card:scale-105 transition duration-500">
                     <div class="p-5">
                         <h3 class="text-base font-bold text-white mb-2 tracking-wide">${data.judul}</h3>
                         <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">${data.deskripsi}</p>

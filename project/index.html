@@ -10,7 +10,55 @@
         body {
             background-color: #0b0f19;
             color: #f3f4f6;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+            animation: moveBg 60s linear infinite;
         }
+
+        @keyframes moveBg {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+
+        /* Animasi melayang halus */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px); /* Naik ke atas 10px */
+            }
+        }
+
+        /* Class untuk dipasang di HTML */
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    /* BARU: Animasi Pantulan Cahaya Mengalir */
+    @keyframes shine {
+        0% {
+            background-position: 200% center;
+        }
+        100% {
+            background-position: -200% center;
+        }
+    }
+
+    /* Class untuk teks gradasi berjalan */
+    .animate-text-shine {
+        background-size: 200% auto;
+        animation: shine 6s linear infinite;
+    }
+
     </style>
 </head>
 
@@ -40,7 +88,7 @@
         <div class="max-w-xl order-2 md:order-1">
             <!-- Gradasi Monokrom pada Nama (Pure White ke Slate Gray) -->
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">Nando</span>
+                Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-white to-gray-600 animate-text-shine">Nando</span>
             </h1>
             <p class="text-gray-400 font-medium mt-2 text-base sm:text-lg">Management of Informatics Student</p>
             <p class="text-gray-400 mt-4 text-sm sm:text-base leading-relaxed">
@@ -56,9 +104,11 @@
         </div>
         
         <!-- Frame Foto/Avatar dengan Lingkaran Gradasi Monokrom Tipis -->
-        <div class="w-48 h-48 sm:w-64 sm:h-64 bg-gradient-to-br from-white/40 via-gray-700 to-gray-900 rounded-full p-[1.5px] shadow-xl order-1 md:order-2">
-            <div class="w-full h-full bg-[#0b0f19] rounded-full flex items-center justify-center">
+        <div class="w-48 h-48 sm:w-64 sm:h-64 bg-gradient-to-br from-white/40 via-gray-700 to-gray-900 rounded-full p-[1.5px] shadow-xl order-1 md:order-2 animate-float">
+            <div class="w-full h-full bg-[#0b0f19] rounded-full flex items-center justify-center overflow-hidden">
+                
                 <span class="text-gray-500 text-xs sm:text-sm">Formal Photo/Avatar</span>
+                
             </div>
         </div>
     </section>
